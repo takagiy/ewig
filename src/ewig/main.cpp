@@ -107,7 +107,7 @@ namespace {
 //     {key::seq(key::alt('w')),  "copy"},
 // });
 
-const aut key_map_custom = make_key_map(
+const auto key_map_custom = make_key_map(
 {
     {key::seq(key::up), "move-up"},
     {key::seq(key::down), "move-down"},
