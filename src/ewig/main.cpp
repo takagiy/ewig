@@ -124,7 +124,7 @@ const auto key_map_custom = make_key_map(
     {key::seq(key::ctrl('j')), "new-line"}, // enter
     {key::seq('j', 'j', 'x'), "kill-line"},
     {key::seq('j', 'j', 'd'), "cut"},
-    {key::seq('j', 'j', 'v'), "paste"},
+    {key::seq('j', 'j', 'p'), "paste"},
     {key::seq('j', 'j', 'v'), "start-selection"}, // ctrl-space
     {key::seq('j', 'j', 'e'), "undo"},
     {key::seq('j', 'j', 'q'), "quit"},
