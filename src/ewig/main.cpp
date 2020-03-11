@@ -73,38 +73,66 @@ void load(Archive& ar, ewig::text& txt)
 namespace ewig {
 namespace {
 
-const auto key_map_emacs = make_key_map(
+// const auto key_map_emacs = make_key_map(
+// {
+//     {key::seq(key::ctrl('p')), "move-up"},
+//     {key::seq(key::up),        "move-up"},
+//     {key::seq(key::down),      "move-down"},
+//     {key::seq(key::ctrl('n')), "move-down"},
+//     {key::seq(key::ctrl('b')), "move-left"},
+//     {key::seq(key::left),      "move-left"},
+//     {key::seq(key::ctrl('f')), "move-right"},
+//     {key::seq(key::right),     "move-right"},
+//     {key::seq(key::page_down), "page-down"},
+//     {key::seq(key::page_up),   "page-up"},
+//     {key::seq(key::backspace), "delete-char"},
+//     {key::seq(key::backspace_),"delete-char"},
+//     {key::seq(key::delete_),   "delete-char-right"},
+//     {key::seq(key::home),      "move-beginning-of-line"},
+//     {key::seq(key::ctrl('a')), "move-beginning-of-line"},
+//     {key::seq(key::end),       "move-end-of-line"},
+//     {key::seq(key::ctrl('e')), "move-end-of-line"},
+//     {key::seq(key::ctrl('i')), "insert-tab"}, // tab
+//     {key::seq(key::ctrl('j')), "new-line"}, // enter
+//     {key::seq(key::ctrl('k')), "kill-line"},
+//     {key::seq(key::ctrl('w')), "cut"},
+//     {key::seq(key::ctrl('y')), "paste"},
+//     {key::seq(key::ctrl('@')), "start-selection"}, // ctrl-space
+//     {key::seq(key::ctrl('_')), "undo"},
+//     {key::seq(key::ctrl('x'), key::ctrl('C')), "quit"},
+//     {key::seq(key::ctrl('x'), key::ctrl('S')), "save"},
+//     {key::seq(key::ctrl('x'), 'h'), "select-whole-buffer"},
+//     {key::seq(key::ctrl('x'), '['), "move-beginning-buffer"},
+//     {key::seq(key::ctrl('x'), ']'), "move-end-buffer"},
+//     {key::seq(key::alt('w')),  "copy"},
+// });
+
+const aut key_map_custom = make_key_map(
 {
-    {key::seq(key::ctrl('p')), "move-up"},
-    {key::seq(key::up),        "move-up"},
-    {key::seq(key::down),      "move-down"},
-    {key::seq(key::ctrl('n')), "move-down"},
-    {key::seq(key::ctrl('b')), "move-left"},
-    {key::seq(key::left),      "move-left"},
-    {key::seq(key::ctrl('f')), "move-right"},
-    {key::seq(key::right),     "move-right"},
+    {key::seq(key::up), "move-up"},
+    {key::seq(key::down), "move-down"},
+    {key::seq(key::left), "move-left"},
+    {key::seq(key::right), "move-right"},
     {key::seq(key::page_down), "page-down"},
     {key::seq(key::page_up),   "page-up"},
     {key::seq(key::backspace), "delete-char"},
     {key::seq(key::backspace_),"delete-char"},
     {key::seq(key::delete_),   "delete-char-right"},
-    {key::seq(key::home),      "move-beginning-of-line"},
-    {key::seq(key::ctrl('a')), "move-beginning-of-line"},
-    {key::seq(key::end),       "move-end-of-line"},
-    {key::seq(key::ctrl('e')), "move-end-of-line"},
+    {key::seq('j', 'j', 'a'), "move-beginning-of-line"},
+    {key::seq('j', 'j', 's'), "move-end-of-line"},
     {key::seq(key::ctrl('i')), "insert-tab"}, // tab
     {key::seq(key::ctrl('j')), "new-line"}, // enter
-    {key::seq(key::ctrl('k')), "kill-line"},
-    {key::seq(key::ctrl('w')), "cut"},
-    {key::seq(key::ctrl('y')), "paste"},
-    {key::seq(key::ctrl('@')), "start-selection"}, // ctrl-space
-    {key::seq(key::ctrl('_')), "undo"},
-    {key::seq(key::ctrl('x'), key::ctrl('C')), "quit"},
-    {key::seq(key::ctrl('x'), key::ctrl('S')), "save"},
-    {key::seq(key::ctrl('x'), 'h'), "select-whole-buffer"},
-    {key::seq(key::ctrl('x'), '['), "move-beginning-buffer"},
-    {key::seq(key::ctrl('x'), ']'), "move-end-buffer"},
-    {key::seq(key::alt('w')),  "copy"},
+    {key::seq('j', 'j', 'x'), "kill-line"},
+    {key::seq('j', 'j', 'd'), "cut"},
+    {key::seq('j', 'j', 'v'), "paste"},
+    {key::seq('j', 'j', 'v'), "start-selection"}, // ctrl-space
+    {key::seq('j', 'j', 'e'), "undo"},
+    {key::seq('j', 'j', 'q'), "quit"},
+    {key::seq('j', 'j', 's'), "save"},
+    {key::seq('j', 'j', 'V'), "select-whole-buffer"},
+    {key::seq('j', 'j', 'g'), "move-beginning-buffer"},
+    {key::seq('j', 'j', 'G'), "move-end-buffer"},
+    {key::seq('j', 'j', 'y'),  "copy"},
 });
 
 void run(int argc, const char** argv, const std::string& fname)
@@ -118,7 +146,7 @@ void run(int argc, const char** argv, const std::string& fname)
     auto serv = boost::asio::io_service{};
     auto term = terminal{serv};
     auto st   = lager::make_store<action>(
-        application{term.size(), key_map_emacs},
+        application{term.size(), key_map_custom},
         update,
         draw,
         lager::with_boost_asio_event_loop{serv, [&] { term.stop(); }},
