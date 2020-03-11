@@ -64,7 +64,7 @@ rec {
     src=fetchTarball {
       url = "https://github.com/etr/libhttpserver/archive/0.17.5.tar.gz";
       sha256 = "0lc3hgxslyig6xg8iy99ffaihk3979bc4h6mn8vqggwrq6pa13vp";
-    }
+    };
     propagatedBuildInputs = [ libmicrohttpd ];
     nativeBuildInputs = [ autoreconfHook gcc9 ];
     configureScript = "../configure";
