@@ -128,7 +128,7 @@ const auto key_map_custom = make_key_map(
     {key::seq('j', 'j', 'v'), "start-selection"}, // ctrl-space
     {key::seq('j', 'j', 'e'), "undo"},
     {key::seq('j', 'j', 'q'), "quit"},
-    {key::seq('j', 'j', 's'), "save"},
+    {key::seq('j', 'j', 'w'), "save"},
     {key::seq('j', 'j', 'V'), "select-whole-buffer"},
     {key::seq('j', 'j', 'g'), "move-beginning-buffer"},
     {key::seq('j', 'j', 'G'), "move-end-buffer"},
