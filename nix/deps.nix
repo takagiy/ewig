@@ -69,7 +69,7 @@ rec {
       sha256 = "1qg5frqvfhb8bpfiz9wivwjz2icy3si112grv188kgypws58n832";
     };
     propagatedBuildInputs = [ libmicrohttpd ];
-    nativeBuildInputs = [ autoreconfHook gcc6 ];
+    nativeBuildInputs = [ autoreconfHook gcc7 ];
     configureScript = "../configure";
     preConfigure = ''
       substituteInPlace ./configure \
