@@ -69,7 +69,7 @@ rec {
       sha256 = "19q01fvilrjswbyfxp1j1m2hy9zbpjq5v01zdgi4s3gz1s7qyhpq";
     };
     propagatedBuildInputs = [ libmicrohttpd ];
-    nativeBuildInputs = [ autoreconfHook gcc7 ];
+    nativeBuildInputs = [ autoreconfHook gcc9 ];
     configureScript = "../configure";
     preConfigure = ''
       substituteInPlace ./configure \
@@ -118,7 +118,7 @@ rec {
     ];
     nativeBuildInputs = [
       cmake
-      gcc7
+      gcc9
       sass
     ];
     propagatedBuildInputs = [
