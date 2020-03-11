@@ -60,14 +60,11 @@ rec {
 
   libhttpserver = stdenv.mkDerivation rec {
     name = "libhttpserver-${version}";
-    version = "git-${commit}";
-    commit = "f6810d9bd62d85f31a8057bc2071f28d43696593";
-    src = fetchFromGitHub {
-      owner = "etr";
-      repo = "libhttpserver";
-      rev = commit;
-      sha256 = "19q01fvilrjswbyfxp1j1m2hy9zbpjq5v01zdgi4s3gz1s7qyhpq";
-    };
+    version = "0.17.5";
+    src=fetchTarball {
+      url = "https://github.com/etr/libhttpserver/archive/0.17.5.tar.gz";
+      sha256 = "0lc3hgxslyig6xg8iy99ffaihk3979bc4h6mn8vqggwrq6pa13vp";
+    }
     propagatedBuildInputs = [ libmicrohttpd ];
     nativeBuildInputs = [ autoreconfHook gcc9 ];
     configureScript = "../configure";
